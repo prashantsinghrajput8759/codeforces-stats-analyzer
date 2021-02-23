@@ -1,16 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 *{
     margin:0;
-    padding:0;
+   /* padding:0;*/
     box-sizing: border-box;
     font-family: 'poppins',sans-serif;
     
 }
 /* fixed padding to all my sections */
 section{
-    padding:80px;
-}
-justify-content: space-between;
+   
+
+justify-content: space-between;}
 hr.solid {
     border-top: 1px solid #bbb;
   }
@@ -27,12 +27,14 @@ hr.solid {
 #stats{
 
    
-    min-height: 100vh;
+    /* min-height: 100vh;*/
+   
 max-height: 100vh;
     background-color:white;
     
  
 }
+
 #head-container{
 
    margin-bottom: 15px;
@@ -41,6 +43,10 @@ max-height: 100vh;
 
 
 
+}
+.content-table{
+    padding: 80px;
+    margin:100px;
 }
 a{
     color:white;
@@ -74,26 +80,31 @@ a{
     position:relative;
     margin-top: 200px;
 }
-#tabl{
+/*#tabl{
     position:absolute;
    top:60em;
 
    
     background-color:white;
-}
+}*/
 #myChart{
-
-    max-height:1000px;
-    max-width: 500px;
+   
+   
     align-items: right;
-    position:absolute;
+   /* position:absolute;
 top:63em;
-left:50em;
+left:50em;*/
 border-collapse: collapse;
 border-radius:5px 5px 0 0;
-overflow:hidden;
+/*overflow:hidden;*/
 box-shadow:0 0 20px rgba(0,0,0,0.15);
   
+}
+
+canvas{
+    min-height:300px;
+    min-width: 450px;
+    margin:auto;
 }
 .content-table{
     

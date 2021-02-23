@@ -3,7 +3,8 @@ $(document).ready(function(){
         const name=$('#btn').val();
        // <!-- alert(name); -->
         const url=" https://codeforces.com/api/user.info?handles="+name;
-        console.log(url);
+        const urll="https://codeforces.com/api/user.rating?handle="+name;
+      //  console.log(url);
         async function getdata() {
 
             const response= await fetch(url);
@@ -12,16 +13,85 @@ $(document).ready(function(){
             if(data.status=="FAILED")
             {alert("User not exist");}
          //console.log(data);
-            const rating =data.result[0].rating;
+           
            // <!--alert(rating); -->
            // <!--console.log(rating);-->
-         document.getElementById( 'rat').textContent=data.result[0].rating; 
+           else
+         {   const rating =data.result[0].rating;
+            let html="";
+            html=` 
+             
+            <table class="content-table">
+                <tr class="first">
+                <td>First Name </td>
+                <td id="frstnme">${data.result[0].firstName}</td>
+             </tr>
+                <tr class="second">
+                <td>Second Name </td>
+                <td id="scndnme">${data.result[0].lastName}</td>
+             </tr>
+            <tr class="third">
+                <td>Rating </td>
+                <td id="rat">${data.result[0].rating}</td>
+             </tr>
+            <tr class="fourth">
+                <td>Max Rating </td>
+                <td id="mxrtng">${data.result[0].maxRating}</td>
+             </tr>
+                <tr class="fifth">
+                <td>Current rank </td>
+                <td id="crntrnk">${data.result[0].rank}</td>
+             </tr>
+             <tr>
+                 <td>Best rank</td>
+                 <td id="bstrnk"></td>
+             </tr>
+             <tr>
+                <td>Total contest</td>
+                <td id="cnt"></td>
+            </tr>
+                
+            
+            
+            </table>
+         
+           
+            
+           
+      `
+      let htmll=' <canvas id="myChart"></canvas>';
+      let html3=`<h2 id="head-container">${name}</h2>`;
+      $.getJSON(urll,function(data){
+            
+        // console.log(data);
+         const length=data.result.length;
+         var maxi=50000;
+         for(i=0;i<length;i++)
+         {
+             var comp=data.result[i].rank;
+             //console.log(comp);
+            
+             if(comp<maxi)
+             {maxi=comp;}
+         }
+         
+         document.getElementById( 'bstrnk').textContent=maxi;
+         document.getElementById( 'cnt').textContent=length;
+     });
+             /*document.getElementById( 'rat').textContent=data.result[0].rating; 
         document.getElementById( 'frstnme').textContent=data.result[0].firstName; 
            document.getElementById( 'scndnme').textContent=data.result[0].lastName;
              document.getElementById( 'mxrtng').textContent=data.result[0].maxRating;
             document.getElementById( 'crntrnk').textContent=data.result[0].rank;
-            document.getElementById( 'head-container').textContent=name;
-        }
+            document.getElementById( 'head-container').textContent=name;}*/
+            let dat=document.getElementById("tabl");
+            dat.innerHTML=html;
+            let chrt=document.getElementById("chrt");
+            chrt.innerHTML=htmll;
+            let headerr=document.getElementById("headerr");
+            headerr.innerHTML=html3;
+            
+        }}
        
         getdata();
        // getcontest();
@@ -40,37 +110,7 @@ $(document).ready(function(){
 
 
 
-$(document).ready(function(){
-    $('button').click(function(){
-        const name=$('#btn').val();
-        var url="https://codeforces.com/api/user.rating?handle="+name;
-       // console.log(url);
 
-        $.getJSON(url,function(data){
-            
-           // console.log(data);
-            const length=data.result.length;
-            var maxi=50000;
-            for(i=0;i<length;i++)
-            {
-                var comp=data.result[i].rank;
-                //console.log(comp);
-               
-                if(comp<maxi)
-                {maxi=comp;}
-            }
-            
-            document.getElementById( 'bstrnk').textContent=maxi;
-            document.getElementById( 'cnt').textContent=length;
-        });
-
-
-
-    });
-   
-
-
-});
 
 
 $(document).ready(function(){
